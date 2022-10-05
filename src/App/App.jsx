@@ -23,6 +23,12 @@ export class App extends Component {
     console.log('componentDidMount');
   }
 
+  async componentDidUpdate(nextProps, nextState) {
+    console.log('componentDidUpdate');
+    console.log('nextProps', nextProps);
+    console.log('nextState', nextState);
+  }
+
   getGallery = async ({ query }) => {
     try {
       this.setState({ loader: true });

@@ -11,6 +11,13 @@ export const fetchGallery = async values => {
   return response.data.hits;
 };
 
+export const addMoreGallery = async values => {
+  const response = await axios.get(
+    `/?q=${values}&page=1&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12&page=2`
+  );
+  return response.data.hits;
+};
+
 // ===============================================
 
 // export const FetchGallery = query => {

@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { createPortal } from 'react-dom';
-import './Modal.scss';
+import './Modal.css';
 
 // - Модальное окно (componentDidMount и componentWillUnmount)
 //   - Проблема z-index, как решать без костылей (порталы)
@@ -30,14 +30,23 @@ export class Modal extends Component {
   };
 
   render() {
+    const { largeImageURL, tags } = this.props;
     return createPortal(
       <div className="overlay" onClick={this.handleBackDropClic}>
         <div className="modal">
           {this.props.children}
-          <img src="#" alt="#" />
+          <img src={largeImageURL} alt={tags} />
         </div>
       </div>,
       modalRoot
     );
   }
+}
+
+{
+  /* <div class="overlay">
+  <div class="modal">
+    <img src="" alt="" />
+  </div>
+</div>; */
 }

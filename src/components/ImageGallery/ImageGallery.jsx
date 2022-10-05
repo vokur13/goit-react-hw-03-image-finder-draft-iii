@@ -1,16 +1,10 @@
-// import { ImageGalleryItem } from 'components/ImageGalleryItem';
+import { ImageGalleryItem } from 'components/ImageGalleryItem';
 
-export const ImageGallery = ({ data }) => {
+export const ImageGallery = ({ data, ...otherProps }) => {
   return (
     <ul className="ImageGallery">
       {data.map(item => (
-        <li key={item.id} className="ImageGalleryItem">
-          <img
-            className="ImageGalleryItem-image"
-            src={item.webformatURL}
-            alt={item.tag}
-          />
-        </li>
+        <ImageGalleryItem key={item.id} item={item} {...otherProps} />
       ))}
     </ul>
   );

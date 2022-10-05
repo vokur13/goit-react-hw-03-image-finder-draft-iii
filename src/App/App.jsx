@@ -5,7 +5,7 @@ import 'css/styles.css';
 // import { Box } from 'components/Box';
 // import { Button } from 'components/Button';
 import { Searchbar } from 'components/Searchbar';
-import { fetchGallery } from '../services/ImageGalleryAPI';
+import { fetchGallery, addMoreGallery } from '../services/ImageGalleryAPI';
 import { Loader } from 'components/Loader';
 import { ImageGallery } from 'components/ImageGallery';
 
@@ -16,6 +16,7 @@ export class App extends Component {
     gallery: [],
     loader: false,
     error: false,
+    page: 1,
   };
 
   //   async componentDidMount() {
@@ -28,7 +29,8 @@ export class App extends Component {
       this.setState({ loader: true });
       const wall = await fetchGallery(query);
       this.setState(state => ({
-        gallery: [...state.gallery, ...wall],
+        gallery: [...wall],
+        // gallery: [...state.gallery, ...wall],
         // gallery: state.gallery.concat(wall),
       }));
     } catch (error) {
@@ -39,17 +41,40 @@ export class App extends Component {
     }
   };
 
+  addMoreGallery = () => {};
+
+  showImageClose = e => {
+    console.log(e.target);
+  };
+
   render() {
     const { loader, gallery, error } = this.state;
     return (
       <>
-        {loader && <Loader />}
-        <Searchbar onSubmit={this.getGallery} />
+        {loader ? (
+          <Loader />
+        ) : (
+          <div>
+            <Searchbar onSubmit={this.getGallery} />
+            <ImageGallery data={gallery} onClick={this.showImageClose} />
+          </div>
+        )}
+
         {error && (
           <p>Sorry, something goes wrong, reload page and try again please</p>
         )}
         {gallery.length > 0 ? <ImageGallery data={gallery} /> : null}
-        {gallery.length > 0 && <button type="button">Load more</button>}
+        {gallery.length > 0 && (
+          <button
+            type="button"
+            onClick={() => {
+              console.log('addGallery');
+              this.addGallery();
+            }}
+          >
+            Load more
+          </button>
+        )}
       </>
     );
   }

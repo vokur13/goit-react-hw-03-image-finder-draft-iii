@@ -20,10 +20,8 @@ export class ImageGalleryItem extends Component {
           className="ImageGalleryItem-image"
           src={item.webformatURL}
           alt={item.tags}
+          onClick={this.openModal}
         />
-        <button type="button" onClick={this.openModal}>
-          Open
-        </button>
         {isModalOpen && (
           <Modal
             largeImageURL={item.largeImageURL}

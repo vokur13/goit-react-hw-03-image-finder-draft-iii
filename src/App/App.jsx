@@ -19,10 +19,9 @@ export class App extends Component {
     page: 1,
   };
 
-  //   async componentDidMount() {
-  //     const response = await fetchGallery();
-  //     this.setState({ gallery: response.data.hits });
-  //   }
+  async componentDidMount() {
+    console.log('componentDidMount');
+  }
 
   getGallery = async ({ query }) => {
     try {
@@ -43,10 +42,6 @@ export class App extends Component {
 
   addMoreGallery = () => {};
 
-  showImageClose = e => {
-    console.log(e.target);
-  };
-
   render() {
     const { loader, gallery, error } = this.state;
     return (
@@ -56,7 +51,7 @@ export class App extends Component {
         ) : (
           <div>
             <Searchbar onSubmit={this.getGallery} />
-            <ImageGallery data={gallery} onClick={this.showImageClose} />
+            <ImageGallery data={gallery} />
           </div>
         )}
 

@@ -13,7 +13,7 @@ export class ImageGalleryItem extends Component {
 
   render() {
     const { isModalOpen } = this.state;
-    const { item, onClick } = this.props;
+    const { item } = this.props;
     return (
       <li className="ImageGalleryItem">
         <img

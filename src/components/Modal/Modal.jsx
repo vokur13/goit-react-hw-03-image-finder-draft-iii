@@ -32,8 +32,8 @@ export class Modal extends Component {
   render() {
     const { largeImageURL, tags } = this.props;
     return createPortal(
-      <div className="overlay" onClick={this.handleBackDropClic}>
-        <div className="modal">
+      <div className="Overlay" onClick={this.handleBackDropClic}>
+        <div className="Modal">
           {this.props.children}
           <img src={largeImageURL} alt={tags} />
         </div>

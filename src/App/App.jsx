@@ -5,7 +5,7 @@ import 'css/styles.css';
 // import { Box } from 'components/Box';
 // import { Button } from 'components/Button';
 import { Searchbar } from 'components/Searchbar';
-import { fetchGallery, addMoreGallery } from '../services/ImageGalleryAPI';
+import { fetchGallery } from '../services/ImageGalleryAPI';
 import { Loader } from 'components/Loader';
 import { ImageGallery } from 'components/ImageGallery';
 
@@ -16,7 +16,7 @@ export class App extends Component {
     gallery: [],
     loader: false,
     error: false,
-    page: 1,
+    page: 2,
   };
 
   async componentDidMount() {
@@ -30,13 +30,12 @@ export class App extends Component {
   }
 
   getGallery = async ({ query }) => {
+    const { page } = this.state;
     try {
       this.setState({ loader: true });
-      const wall = await fetchGallery(query);
+      const wall = await fetchGallery(query, page);
       this.setState(state => ({
-        gallery: [...wall],
-        // gallery: [...state.gallery, ...wall],
-        // gallery: state.gallery.concat(wall),
+        gallery: [...state.gallery, ...wall],
       }));
     } catch (error) {
       this.setState({ error: true });
